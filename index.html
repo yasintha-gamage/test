@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Profile</title>
+    <style>
+        /* --- Global Resets & Variables --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f3f2ef;
+            color: #191919;
+            padding-bottom: 40px;
+        }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 53px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1128px;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 20px;
+            color: #0a66c2;
+            text-decoration: none;
+        }
+
+        /* --- Main Layout --- */
+        .main-container {
+            max-width: 1128px;
+            margin: 73px auto 0 auto; /* 53px nav height + 20px spacing */
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        /* --- Profile Cards (Shared Styles) --- */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 24px;
+            margin-bottom: 8px;
+        }
+
+        /* --- Hero/Top Profile Card --- */
+        .hero-card {
+            padding: 0;
+            position: relative;
+        }
+
+        .banner {
+            height: 200px;
+            background: linear-gradient(135deg, #a0b4cb, #708090);
+            width: 100%;
+        }
+
+        .profile-pic-container {
+            padding: 0 24px;
+            margin-top: -100px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .profile-pic {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            background-color: #e0e0e0;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            padding: 0 24px 24px 24px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #191919;
+        }
+
+        .profile-headline {
+            font-size: 16px;
+            color: #191919;
+            margin-top: 4px;
+        }
+
+        .profile-location {
+            font-size: 14px;
+            color: #666666;
+            margin-top: 8px;
+        }
+
+        .cta-buttons {
+            margin-top: 16px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #0a66c2;
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #004182;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #0a66c2;
+            border: 1px solid #0a66c2;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(10, 102, 194, 0.1);
+            border-width: 2px;
+            padding: 5px 15px; /* Adjust padding slightly for thicker border */
+        }
+
+        /* --- Section Content Styles --- */
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #191919;
+            margin-bottom: 16px;
+        }
+
+        .about-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #191919;
+        }
+
+        /* --- Experience/Education List --- */
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .list-item {
+            display: flex;
+            gap: 16px;
+        }
+
+        .item-logo {
+            width: 48px;
+            height: 48px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #666666;
+            font-size: 12px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .item-details h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #191919;
+        }
+
+        .item-subtitle {
+            font-size: 14px;
+            color: #191919;
+            margin-top: 2px;
+        }
+
+        .item-date {
+            font-size: 14px;
+            color: #666666;
+            margin-top: 2px;
+        }
+
+        .item-description {
+            font-size: 14px;
+            color: #191919;
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .banner {
+                height: 140px;
+            }
+            .profile-pic-container {
+                margin-top: -70px;
+            }
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">LinkedOut</a>
+            </div>
+    </nav>
+
+    <main class="main-container">
+
+        <section class="card hero-card">
+            <div class="banner"></div>
+            
+            <div class="profile-pic-container">
+                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
+            </div>
+
+            <div class="profile-details">
+                <h1 class="profile-name">Alex Morgan</h1>
+                <p class="profile-headline">Full Stack Software Engineer | React, Node.js, & Cloud Architecture</p>
+                <p class="profile-location">San Francisco, California • <a href="#" style="color: #0a66c2; text-decoration: none; font-weight: 600;">Contact info</a></p>
+                
+                <div class="cta-buttons">
+                    <a href="mailto:your-email@example.com" class="btn btn-primary">Connect</a>
+                    <a href="#experience" class="btn btn-secondary">View Experience</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="card-title">About</h2>
+            <p class="about-text">
+                I am a passionate Software Engineer with 4+ years of experience building scalable web applications. 
+                Specializing in JavaScript ecosystems, cloud infrastructure, and agile methodologies. I love solving complex 
+                technical puzzles and transforming user requirements into clean, maintainable code.
+            </p>
+        </section>
+
+        <section class="card" id="experience">
+            <h2 class="card-title">Experience</h2>
+            <div class="item-list">
+                
+                <div class="list-item">
+                    <div class="item-logo">TechCorp</div>
+                    <div class="item-details">
+                        <h4>Senior Software Engineer</h4>
+                        <p class="item-subtitle">TechCorp · Full-time</p>
+                        <p class="item-date">Jan 2024 - Present · 2 yrs 5 mos</p>
+                        <p class="item-description">
+                            Leading a team of 4 developers to modernize a legacy enterprise application. Reduced page load times by 40% using code-splitting and server-side rendering techniques.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="list-item">
+                    <div class="item-logo">WebStart</div>
+                    <div class="item-details">
+                        <h4>Software Engineer</h4>
+                        <p class="item-subtitle">WebStart Startup · Full-time</p>
+                        <p class="item-date">Jun 2022 - Dec 2023 · 1 yr 7 mos</p>
+                        <p class="item-description">
+                            Developed and maintained RESTful APIs using Node.js and Express. Integrated third-party payment gateways and optimized PostgreSQL database queries.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="card-title">Education</h2>
+            <div class="item-list">
+                
+                <div class="list-item">
+                    <div class="item-logo">Uni</div>
+                    <div class="item-details">
+                        <h4>University of Computer Science</h4>
+                        <p class="item-subtitle">Bachelor of Science in Computer Science</p>
+                        <p class="item-date">2018 - 2022</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
