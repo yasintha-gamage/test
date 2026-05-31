@@ -203,6 +203,7 @@
             width: 100%;
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
             background-color: #e0e0e0;
+            cursor: pointer; /* Touch/Click කල හැකි බව පෙන්වීමට */
         }
 
         /* Absolute positioning forces elements to fill the 16:9 wrapper precisely */
@@ -239,6 +240,53 @@
             font-size: 14px;
         }
 
+        /* --- Full-Screen Media Modal Styles --- */
+        .media-modal {
+            display: none; /* ආරම්භයේදී සඟවා ඇත */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content-wrapper {
+            max-width: 90%;
+            max-height: 85%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .media-modal img, 
+        .media-modal video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #ffffff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 1001;
+        }
+
+        .close-modal:hover {
+            color: #bbb;
+        }
+
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
             .banner {
@@ -253,6 +301,11 @@
             }
             .media-grid {
                 grid-template-columns: 1fr;
+            }
+            .close-modal {
+                top: 15px;
+                right: 20px;
+                font-size: 30px;
             }
         }
     </style>
@@ -307,41 +360,35 @@
             <div class="media-grid">
                 
                 <div class="media-card">
-                    <div class="media-wrapper">
+                    <div class="media-wrapper" onclick="openMedia('image', 'post101.jpg')">
                         <img src="post101.jpg" alt="Tech Project Showcase">
                     </div>
                     <div class="media-info">
-                        <h4 class="media-title">
-                             Tech Project Deployment
-                        </h4>
+                        <h4 class="media-title">Tech Project Deployment</h4>
                         <p class="media-desc">Snapshot from the successful cross-functional deployment of our latest IT initiative.</p>
                     </div>
                 </div>
 
                 <div class="media-card">
-                    <div class="media-wrapper">
-                        <video controls poster="video-thumbnail.jpg">
+                    <div class="media-wrapper" onclick="openMedia('video', 'event-strategy-video.mp4')">
+                        <video poster="video-thumbnail.jpg">
                             <source src="event-strategy-video.mp4" type="video/mp4">
                             <source src="event-strategy-video.webm" type="video/webm">
                             Your browser does not support the video tag.
                         </video>
                     </div>
                     <div class="media-info">
-                        <h4 class="media-title">
-                             Event Strategy Highlights
-                        </h4>
+                        <h4 class="media-title">Event Strategy Highlights</h4>
                         <p class="media-desc">A brief walkthrough presentation of strategic planning and execution metrics.</p>
                     </div>
                 </div>
 
                 <div class="media-card">
-                    <div class="media-wrapper">
+                    <div class="media-wrapper" onclick="openMedia('image', 'project-image2.jpg')">
                         <img src="project-image2.jpg" alt="Innovation Hackathon">
                     </div>
                     <div class="media-info">
-                        <h4 class="media-title">
-                            Innovation & Hackathons
-                        </h4>
+                        <h4 class="media-title">Innovation & Hackathons</h4>
                         <p class="media-desc">Coordinating and mentoring teams during a 24-hour tech build event.</p>
                     </div>
                 </div>
@@ -350,6 +397,50 @@
         </section>
 
     </main>
+
+    <div id="mediaModal" class="media-modal" onclick="closeMedia()">
+        <span class="close-modal" onclick="closeMedia()">&times;</span>
+        <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+            <div id="modalTarget"></div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('mediaModal');
+        const modalTarget = document.getElementById('modalTarget');
+
+        function openMedia(type, src) {
+            modalTarget.innerHTML = ''; // කලින් තිබූ දේවල් ඉවත් කිරීමට
+            
+            if (type === 'image') {
+                const img = document.createElement('img');
+                img.src = src;
+                modalTarget.appendChild(img);
+            } else if (type === 'video') {
+                const video = document.createElement('video');
+                video.src = src;
+                video.controls = true;
+                video.autoplay = true; // Full screen වූ සැනින් video එක play වීමට
+                modalTarget.appendChild(video);
+            }
+            
+            modal.style.display = 'flex'; // Modal එක පෙන්වීම
+            document.body.style.overflow = 'hidden'; // පසුබිම scroll වීම වැළැක්වීමට
+        }
+
+        function closeMedia() {
+            modal.style.display = 'none'; // Modal එක සඟවීම
+            modalTarget.innerHTML = ''; // වීඩියෝවක් තිබුණහොත් එය නවතා දැමීමට කේතය හිස් කිරීම
+            document.body.style.overflow = 'auto'; // නැවත scroll කිරීමට ඉඩ දීම
+        }
+
+        // ESC කී එක එබූ විටද වසා දැමීමට ඉඩ දීම
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMedia();
+            }
+        });
+    </script>
 
 </body>
 </html>
