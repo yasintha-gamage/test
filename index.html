@@ -49,6 +49,15 @@
             font-size: 20px;
             color: #0a66c2;
             text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px; /* රූපය සහ Text එක අතර පරතරය */
+        }
+
+        .logo-img {
+            height: 24px; /* Navbar එකට ගැලපෙන ලෙස උස සකසා ඇත */
+            width: auto;
+            object-fit: contain;
         }
 
         /* --- Main Layout --- */
@@ -321,7 +330,9 @@
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo"><i class="fas fa-briefcase"></i> Profile</a>
+            <a href="#" class="logo">
+                <img src="profilei.png" alt="Profile Logo" class="logo-img"> Profile
+            </a>
         </div>
     </nav>
 
