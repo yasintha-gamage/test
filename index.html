@@ -1,577 +1,1131 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Profile</title>
+
     <link rel="icon" type="image/png" href="favicon.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+
         /* --- Global Resets & Variables --- */
+
         * {
+
             margin: 0;
+
             padding: 0;
+
             box-sizing: border-box;
+
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
         }
+
+
 
         body {
+
             background-color: #f3f2ef;
+
             color: #191919;
+
             padding-bottom: 40px;
+
         }
+
+
 
         /* --- Navigation Bar --- */
+
         .navbar {
+
             background-color: #ffffff;
+
             border-bottom: 1px solid #e0e0e0;
+
             position: fixed;
+
             top: 0;
+
             width: 100%;
+
             height: 53px;
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             z-index: 100;
+
         }
+
+
 
         .nav-container {
+
             width: 100%;
+
             max-width: 1128px;
+
             padding: 0 24px;
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
         }
+
+
 
         .logo {
+
             font-weight: 700;
+
             font-size: 20px;
+
             color: #0a66c2;
+
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px; /* රූපය සහ Text එක අතර පරතරය */
+
         }
 
-        .logo-img {
-            height: 24px; /* Navbar එකට ගැලපෙන ලෙස උස සකසා ඇත */
-            width: auto;
-            object-fit: contain;
-        }
+
 
         /* --- Main Layout --- */
+
         .main-container {
+
             max-width: 1128px;
+
             margin: 73px auto 0 auto; /* 53px nav height + 20px spacing */
+
             padding: 0 24px;
+
             display: grid;
+
             grid-template-columns: 1fr;
+
             gap: 20px;
+
         }
+
+
 
         /* --- Profile Cards (Shared Styles) --- */
+
         .card {
+
             background-color: #ffffff;
+
             border: 1px solid #e0e0e0;
+
             border-radius: 8px;
+
             overflow: hidden;
+
             padding: 24px;
+
             margin-bottom: 8px;
+
         }
+
+
 
         /* --- Hero/Top Profile Card --- */
+
         .hero-card {
+
             padding: 0;
+
             position: relative;
+
         }
+
+
 
         .banner {
+
             height: 200px;
+
             background: linear-gradient(135deg, #a0b4cb, #708090);
+
             width: 100%;
+
         }
+
+
 
         .profile-pic-container {
+
             padding: 0 24px;
+
             margin-top: -100px;
+
             position: relative;
+
             margin-bottom: 20px;
+
         }
+
+
 
         .profile-pic {
+
             width: 160px;
+
             height: 160px;
+
             border-radius: 50%;
+
             border: 4px solid #ffffff;
+
             background-color: #e0e0e0;
+
             object-fit: cover;
+
         }
+
+
 
         .profile-details {
+
             padding: 0 24px 24px 24px;
+
         }
+
+
 
         .profile-name {
+
             font-size: 24px;
+
             font-weight: 600;
+
             color: #191919;
+
         }
+
+
 
         .profile-headline {
+
             font-size: 16px;
+
             color: #191919;
+
             margin-top: 4px;
+
         }
+
+
 
         .profile-location {
+
             font-size: 14px;
+
             color: #666666;
+
             margin-top: 8px;
+
         }
+
+
 
         .cta-buttons {
+
             margin-top: 16px;
+
             display: flex;
+
             gap: 8px;
+
             flex-wrap: wrap;
+
         }
+
+
 
         .btn {
+
             padding: 6px 16px;
+
             border-radius: 50px;
+
             font-size: 16px;
+
             font-weight: 600;
+
             cursor: pointer;
+
             transition: background-color 0.2s;
+
             text-decoration: none;
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 8px;
+
         }
+
+
 
         .btn-primary {
+
             background-color: #0a66c2;
+
             color: #ffffff;
+
             border: none;
+
         }
+
+
 
         .btn-primary:hover {
+
             background-color: #004182;
+
         }
+
+
 
         .btn-secondary {
+
             background-color: transparent;
+
             color: #0a66c2;
+
             border: 1px solid #0a66c2;
+
         }
+
+
 
         .btn-secondary:hover {
+
             background-color: rgba(10, 102, 194, 0.1);
+
             border-width: 2px;
+
             padding: 5px 15px;
+
         }
+
+
 
         /* --- Section Content Styles --- */
+
         .card-title {
+
             font-size: 20px;
+
             font-weight: 600;
+
             color: #191919;
+
             margin-bottom: 16px;
+
             display: flex;
+
             align-items: center;
+
             gap: 8px;
+
         }
+
+
 
         .about-text {
+
             font-size: 14px;
+
             line-height: 1.5;
+
             color: #191919;
+
         }
+
+
 
         /* --- Media Gallery Grid --- */
+
         .media-grid {
+
             display: grid;
+
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
             gap: 20px;
+
             margin-top: 16px;
+
         }
+
+
 
         .media-card {
+
             border: 1px solid #e0e0e0;
+
             border-radius: 6px;
+
             overflow: hidden;
+
             background-color: #fafafa;
+
             display: flex;
+
             flex-direction: column;
+
         }
+
+
 
         /* Container keeping everything to a 16:9 ratio */
+
         .media-wrapper {
+
             position: relative;
+
             width: 100%;
+
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
+
             background-color: #e0e0e0;
+
         }
+
+
 
         /* Absolute positioning forces elements to fill the 16:9 wrapper precisely */
+
         .media-wrapper img, 
+
         .media-wrapper video {
+
             position: absolute;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 100%;
+
             object-fit: cover;
+
             display: block;
+
         }
+
+
 
         /* Visual cue indicating gallery images can be interacted with */
+
         .media-wrapper img {
+
             cursor: pointer;
+
             transition: transform 0.2s ease;
+
         }
+
+
 
         .media-wrapper img:hover {
+
             transform: scale(1.02);
+
         }
+
+
 
         .media-info {
+
             padding: 12px;
+
         }
+
+
 
         .media-title {
+
             font-size: 15px;
+
             font-weight: 600;
+
             color: #191919;
+
             margin-bottom: 4px;
+
         }
+
+
 
         .media-desc {
+
             font-size: 13px;
+
             color: #666666;
+
             line-height: 1.4;
+
         }
+
+
 
         /* --- Icon Styling --- */
+
         .icon-small {
+
             font-size: 14px;
+
         }
+
+
 
         /* --- Full-Screen Lightbox Modal Styles --- */
+
         .modal {
+
             display: none; 
+
             position: fixed; 
+
             z-index: 1000; 
+
             left: 0;
+
             top: 0;
+
             width: 100%;
+
             height: 100%;
+
             background-color: rgba(0, 0, 0, 0.9);
+
             justify-content: center;
+
             align-items: center;
+
             cursor: pointer;
+
             opacity: 0;
+
             transition: opacity 0.3s ease;
+
         }
+
+
 
         .modal.show {
+
             display: flex;
+
             opacity: 1;
+
         }
+
+
 
         .modal-content {
+
             max-width: 90%;
+
             max-height: 85%;
+
             object-fit: contain;
+
             border-radius: 4px;
+
             transform: scale(0.9);
+
             transition: transform 0.3s ease;
+
         }
+
+
 
         .modal.show .modal-content {
+
             transform: scale(1);
+
         }
+
+
 
         .close-btn {
+
             position: absolute;
+
             top: 20px;
+
             right: 30px;
+
             color: #ffffff;
+
             font-size: 40px;
+
             font-weight: bold;
+
             cursor: pointer;
+
         }
+
+
 
         /* --- Responsive Design --- */
+
         @media (max-width: 768px) {
+
             .banner {
+
                 height: 140px;
+
             }
+
             .profile-pic-container {
+
                 margin-top: -70px;
+
             }
+
             .profile-pic {
+
                 width: 120px;
+
                 height: 120px;
+
             }
+
             .media-grid {
+
                 grid-template-columns: 1fr;
+
             }
+
             .close-btn {
+
                 top: 15px;
+
                 right: 20px;
+
                 font-size: 35px;
+
             }
+
         }
+
     </style>
+
 </head>
+
 <body>
 
+
+
     <nav class="navbar">
+
         <div class="nav-container">
-            <a href="#" class="logo">
-                <img src="profilei.png" alt="Profile Logo" class="logo-img"> Profile
-            </a>
+
+            <a href="#" class="logo"><i class="fas fa-briefcase"></i> Profile</a>
+
         </div>
+
     </nav>
+
+
 
     <main class="main-container">
 
+
+
         <section class="card hero-card">
+
             <div class="banner"></div>
+
             
+
             <div class="profile-pic-container">
+
                 <img src="dp.jpg" alt="Profile Picture" class="profile-pic">
+
             </div>
+
+
 
             <div class="profile-details">
+
                 <h1 class="profile-name">Yasintha Gamage</h1>
+
                 <p class="profile-headline">Aspiring IT Professional | Experienced in Tech Projects & Event Strategy | Connecting People & Technology | Driven by Innovation</p>
+
                 <p class="profile-location"><i class=""></i>    <a href="#" style="color: #0a66c2; text-decoration: none; font-weight: 600;"></a></p>
+
                 
+
                 <div class="cta-buttons">
+
                     <a href="https://wa.me/message/J627RTQLHOZVP1" class="btn btn-primary">
+
                         <i class="fab fa-whatsapp"></i> Contact
+
                     </a>
+
                     <a href="#gallery" class="btn btn-secondary">
+
                         <i class="fas fa-images"></i> View Media
+
                     </a>
+
                 </div>
+
             </div>
+
         </section>
+
+
 
         <section class="card">
+
             <h2 class="card-title">
+
                 <i class="fas fa-user-circle"></i> About
+
             </h2>
+
             <p class="about-text">
+
                 Currently looking for opportunities in IT field, I am an aspiring IT professional with a proven track record in managing tech projects and executing strategic events. 
+
                 <br><br>
+
                 I thrive at the intersection of technical execution and human connection, ensuring that complex solutions are not only delivered successfully but also align with user needs and strategic goals. Whether coordinating cross-functional teams or deploying tech-driven initiatives, I am focused on creating impactful digital experiences.   </p>
+
         </section>
+
+
 
         <section class="card" id="gallery">
+
             <h2 class="card-title">
+
                 <i class="fas fa-images"></i> Images & Videos
+
             </h2>
+
             <div class="media-grid">
+
                 
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <img src="post101.jpg" alt="Images design,edition">
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                              Images design & edition
+
                         </h4>
+
                         <p class="media-desc">Some of the images created for several clients.</p>
+
                     </div>
+
                 </div>
 
+
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <img src="post100.png" alt="Logos,Icons creations">
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                             Logos & Icons creations
+
                         </h4>
+
                         <p class="media-desc">Some of the logo,icon s created for several clients.</p>
+
                     </div>
+
                 </div>
 
+
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <img src="com.jpg" alt="achievements">
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                             Achievements of Moratuwa campus & Learning academy
+
                         </h4>
+
                         <p class="media-desc">Achievements include successfully completing several online programs at the Moratuwa campus and one program at a Learning Academy, and receiving a scholarship of 10,000.</p>
+
                     </div>
+
                 </div>
 
+
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <img src="post102.jpg" alt="Clients feedback">
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                             Clients feedback
+
                         </h4>
+
                         <p class="media-desc">One of the feedback of several clients.</p>
+
                     </div>
+
                 </div>
+
                 
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <video controls poster="vpost.jpg">
+
                             <source src="vpost100.mp4" type="video/mp4">
+
                             <source src="event-strategy-video.webm" type="video/webm">
+
                             Your browser does not support the video tag.
+
                         </video>
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                              Achievement of DP IT Campus 
+
                         </h4>
+
                         <p class="media-desc">Practical results of passionate learning. </p>
+
                     </div>
+
                 </div>
 
+
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <video controls poster="vp2.jpg">
+
                             <source src="vpost200.mp4" type="video/mp4">
+
                             <source src="event-strategy-video.webm" type="video/webm">
+
                             Your browser does not support the video tag.
+
                         </video>
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                              School exhibition 
+
                         </h4>
+
                         <p class="media-desc">I supported the managing, video editing and worked with friends for the school exhibition. </p>
+
                     </div>
+
                 </div>
+
                 
 
+
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <video controls poster="pap.jpg">
+
                             <source src="vap.mp4" type="video/mp4">
+
                             <source src="event-strategy-video.webm" type="video/webm">
+
                             Your browser does not support the video tag.
+
                         </video>
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                              Case study app 
+
                         </h4>
+
                         <p class="media-desc">This is the app I created on the Appmaker platform introduced by Dialog. </p>
+
                     </div>
+
                 </div>
 
+
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <video controls poster="pwp.jpg">
+
                             <source src="vwp1.mp4" type="video/mp4">
+
                             <source src="event-strategy-video.webm" type="video/webm">
+
                             Your browser does not support the video tag.
+
                         </video>
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                              Web site
+
                         </h4>
+
                         <p class="media-desc">This is one of the practices I did when I was learning languages ​​like html, css, etc. </p>
+
                     </div>
+
                 </div>
 
+
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <video controls poster="pva.jpg">
+
                             <source src="va.mp4" type="video/mp4">
+
                             <source src="event-strategy-video.webm" type="video/webm">
+
                             Your browser does not support the video tag.
+
                         </video>
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                              Animation
+
                         </h4>
+
                         <p class="media-desc">One of the animation created for several clients. </p>
+
                     </div>
+
                 </div>
 
+
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <video controls poster="pbgm.jpg">
+
                             <source src="bgm.mp4" type="video/mp4">
+
                             <source src="event-strategy-video.webm" type="video/webm">
+
                             Your browser does not support the video tag.
+
                         </video>
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                              Background music track
+
                         </h4>
+
                         <p class="media-desc">Some of the BGMs created for several clients. This only four clips. </p>
+
                     </div>
+
                 </div>
 
+
+
                 <div class="media-card">
+
                     <div class="media-wrapper">
+
                         <video controls poster="pm.jpg">
+
                             <source src="vm.mp4" type="video/mp4">
+
                             <source src="event-strategy-video.webm" type="video/webm">
+
                             Your browser does not support the video tag.
+
                         </video>
+
                     </div>
+
                     <div class="media-info">
+
                         <h4 class="media-title">
+
                              AI music
+
                         </h4>
+
                         <p class="media-desc">One of the AI ​​musics created for several clients. This only one clip. </p>
+
                     </div>
+
                 </div>
+
+
 
             </div>
+
         </section>
+
+
 
     </main>
 
+
+
     <div id="imageModal" class="modal" onclick="closeModal()">
+
         <span class="close-btn">&times;</span>
+
         <img class="modal-content" id="fullScreenImage" alt="Full Screen View">
+
     </div>
+
     
+
     <script>
+
         const modal = document.getElementById('imageModal');
+
         const modalImg = document.getElementById('fullScreenImage');
 
+
+
         // Target exclusively the images within media-cards to leave your avatar unaffected
+
         document.querySelectorAll('.media-card img').forEach(img => {
+
             img.addEventListener('click', function() {
+
                 modalImg.src = this.src;
+
                 modal.style.display = 'flex';
+
                 
+
                 // Triggers structural transition initialization smoothly
+
                 setTimeout(() => {
+
                     modal.classList.add('show');
+
                 }, 10);
+
             });
+
         });
 
+
+
         function closeModal() {
+
             modal.classList.remove('show');
+
             setTimeout(() => {
+
                 modal.style.display = 'none';
+
             }, 300); // Animation matching structural synchronization window
+
         }
+
     </script>
 
+
+
 </body>
+
 </html>
